@@ -33,7 +33,12 @@ use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 //     return view('welcome');
 // });
 
-Auth::routes(['verify' => true]);
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
+
 
 Route::get('/member', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
