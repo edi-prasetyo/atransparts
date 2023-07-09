@@ -4,7 +4,7 @@
 /public/hot
 /public/storage
 /storage/*.key
-/database
+/database/migrations
 /public
 .env
 .env.backup
