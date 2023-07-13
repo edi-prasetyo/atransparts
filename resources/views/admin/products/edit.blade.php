@@ -75,7 +75,7 @@
                             <div class="form-check form-switch">
                                 <label class="form-check-label">Trending</label>
                                 <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" name="trending" {{$category->trending == '1' ?
+                                    id="flexSwitchCheckDefault" name="trending" {{$product->trending == '1' ?
                                 'checked':''}}>
                             </div>
                         </div>
