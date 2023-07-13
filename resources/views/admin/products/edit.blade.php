@@ -25,16 +25,7 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">Category</label>
-                        <select name="category_id" class="form-select form-select mb-3">
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{$category->id == $product->category_id ?
-                                'selected':''}}>
-                                {{ $category->slug }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
 
                     <div class="col-md-6">
                         <label class="form-label">Produksi</label>
