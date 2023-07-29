@@ -9,4 +9,6 @@ return [
     'product_desc' => 'Find the Best Products at Atransparts',
     'latest_news' => 'Latest News',
     'news_desc' => 'The latest news about car components and vehicle maintenance',
+    'merek_title' => 'Compatible with various makes of Vehicles',
+    'merek_desc' => 'Our products can be used for various well-known vehicle brands in Indonesia. The quality of the products we provide is certified and tested. Make sure the product code matches the brand or type of car.'
 ];

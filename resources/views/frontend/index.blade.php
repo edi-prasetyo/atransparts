@@ -89,7 +89,7 @@
 
             @foreach($products as $product)
             <div class="col-md-3">
-                <div class="card">
+                <div class="card mb-3">
 
                     <a href="{{url('product/'.$product->slug)}}" class="text-muted text-decoration-none">
                         <div class="card-img-cover">
@@ -170,66 +170,65 @@
 </section>
 
 
-{{-- <section>
+<section>
     <div class="container px-4 py-5">
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div class="col-md-7 d-flex flex-column align-items-start gap-2">
-                <h1 class="fw-bold text-body-emphasis">Kompatibel dengan berbagai merek Kendaraan</h1>
-                <p class="text-body-secondary">Produk Kami bisa di gunakan untuk berbagai merek kendaraan ternama yang
-                    ada di
-                    Indonesia. Kualitas produk yang kami berikan sudah tersertifikasi dan sudah teruji. Pastikan kode
-                    produk sesuai dengan merek atau type mobil. </p>
-                <a href="#" class="btn btn-primary btn-lg">Primary button</a>
+                <h1 class="fw-bold text-body-emphasis">{{__('homepage.merek_title')}}</h1>
+                <p class="text-body-secondary">{{__('homepage.merek_desc')}} </p>
+                <a href="{{url(LaravelLocalization::getCurrentLocale() .'/products')}}"
+                    class="btn btn-primary btn-lg">{{__('homepage.hero_button')}}</a>
             </div>
 
             <div class="col-md-5">
                 <div class="row ">
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid"
-                                    src="https://www.toyota.astra.co.id/sites/default/files/2019-11/fit-tc-logo.jpeg">
+                                <img class="img-fluid" src="{{asset('uploads/logo/nissan.png')}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid"
-                                    src="https://seeklogo.com/images/N/Nissan-logo-4B3C580C8A-seeklogo.com.png">
+                                <img class="img-fluid" src="{{asset('uploads/logo/toyota.png')}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid"
-                                    src="https://cdn.pixabay.com/photo/2016/08/15/18/18/mitsubishi-1596079_640.png">
+                                <img class="img-fluid" src="{{asset('uploads/logo/mitsubishi.png')}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid"
-                                    src="https://cdn.iconscout.com/icon/free/png-256/free-suzuki-282144.png">
+                                <img class="img-fluid" src="{{asset('uploads/logo/wuling.png')}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid"
-                                    src="https://i.pinimg.com/736x/8a/07/95/8a07951e3b485d74996cb21fadae18a0.jpg">
+                                <img class="img-fluid" src="{{asset('uploads/logo/honda.png')}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid"
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuPq6k18jU-XE3YWQ5i6JTuKmavp90VIEFCw&usqp=CAU">
+                                <img class="img-fluid" src="{{asset('uploads/logo/daihatsu.png')}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img class="img-fluid" src="{{asset('uploads/logo/isuzu.png')}}">
                             </div>
                         </div>
                     </div>
@@ -239,7 +238,7 @@
         </div>
     </div>
 
-</section> --}}
+</section>
 
 {{-- <section>
     <div class="container">

@@ -48,23 +48,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card border-0">
-                    <img src="https://tf01.themeruby.com/recipe/wp-content/uploads/sites/2/2019/07/f137-370x250.jpg"
-                        class="rounded" alt="...">
 
-                    <h4 class="card-title my-3">How to Make Cappuccino without a Machine</h4>
-                    <p class="card-text text-muted">Some quick example text to build on the card title and make up
-                        the bulk
-                        of the card's content.</p>
-                    <div class="d-flex justify-content-between align-items-start text-muted">
-                        <div class="date fs-6">
-                            <i class='bx bx-calendar'></i> 17 Dec 2023
-                        </div>
-                        <div class="view">
-                            <i class='bx bx-bar-chart-alt-2'></i> 1432 View
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

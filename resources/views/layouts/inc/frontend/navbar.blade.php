@@ -87,11 +87,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="offcanvas offcanvas-end text-muted text-bg-dark" tabindex="-1" id="offcanvasNavbar2"
+        <div class="offcanvas offcanvas-end text-muted text-bg-light" tabindex="-1" id="offcanvasNavbar2"
             aria-labelledby="offcanvasNavbar2Label">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                <h5 class="offcanvas-title" id="offcanvasNavbar2Label"><img
+                        src="{{asset('uploads/logo/' .$option_nav->logo)}}"></h5>
+                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
