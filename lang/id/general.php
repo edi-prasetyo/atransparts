@@ -2,7 +2,7 @@
 
 return [
     'read_more' => 'Selengkapnya ..',
-    'buy' => 'Beli Sekarang',
+    'buy' => 'Beli',
     // Menu
     'menu_home' => 'Beranda',
     'menu_product' => 'Produk',

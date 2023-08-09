@@ -14,8 +14,8 @@
   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/offcanvas/offcanvas-navbar.css')}}" rel="stylesheet">
-  {{--
-  <link href="{{asset('assets/vendor/fonts/poppins/styles.css')}}" rel="stylesheet"> --}}
+  {!! ReCaptcha::htmlScriptTagJsApi() !!}
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -27,22 +27,10 @@
     </main>
   </div>
   @include('layouts.inc.frontend.footer')
-  <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
-  <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/vendor/offcanvas/offcanvas-navbar.js')}}"></script>
-  {{-- <script type="text/javascript">
-    var nav = document.querySelector('nav');
-  
-        window.addEventListener('scroll', function () {
-          if (window.pageYOffset > 100) {
-            nav.classList.add('bg-white', 'shadow-sm');
-          } else {
-            nav.classList.remove('bg-white', 'shadow-sm');
-          }
-        });
-  </script> --}}
+  <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
+  <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+
   @yield('scripts')
 </body>
 

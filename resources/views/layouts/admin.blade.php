@@ -20,7 +20,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/vendor/fonts/poppins/styles.css')}}">
 
-    <!-- Scripts -->
+    <!-- Select 2 -->
+    {{-- Select 2 Bootstrap 5 --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 
 </head>
@@ -42,11 +46,16 @@
         </div>
     </div>
 
-    <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
+    {{-- Select 2 Bootstrap 5 --}}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    {{-- End Select 2 --}}
+
+    {{-- <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script> --}}
     <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-    </script>
-    <script src="{{asset('admin/vendor/autocomplete/jquery-ui.js')}}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+    </script> --}}
+    {{-- <script src="{{asset('admin/vendor/autocomplete/jquery-ui.js')}}"></script> --}}
 
     <link href="{{asset('admin/vendor/summernote/summernote-lite.min.css')}}" rel="stylesheet">
     <script src="{{asset('admin/vendor/summernote/summernote-lite.min.js')}}"></script>
@@ -91,7 +100,7 @@
         });
 
     </script>
-
+    @yield('scripts')
 
 </body>
 

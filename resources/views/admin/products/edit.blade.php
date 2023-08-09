@@ -26,7 +26,7 @@
                 @method('PUT')
                 <div class="row">
 
-
+                    <input type="hidden" name="slug" class="form-control" value="{{$product->slug}}" readonly>
                     <div class="col-md-6">
                         <label class="form-label">Produksi</label>
                         <select name="production_id"
@@ -46,23 +46,9 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" name="slug" class="form-control" value="{{$product->slug}}" readonly>
+                        <input type="text" name="name" class="form-control" value="{{$product->name}}">
                     </div>
-                    <h3 class="my-3 pt-3 border-top">Detail</h3>
-                    <div class="col-md-4">
-                        <label class="form-label">Original Price</label>
-                        <input type="text" name="original_price" value="{{$product->original_price}}"
-                            class="form-control">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Selling Price</label>
-                        <input type="text" name="selling_price" value="{{$product->selling_price}}"
-                            class="form-control">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Quantity</label>
-                        <input type="text" name="quantity" value="{{$product->quantity}}" class="form-control">
-                    </div>
+
                     <div class="row mt-5">
                         <div class="col-md-6">
                             <div class="form-check form-switch">

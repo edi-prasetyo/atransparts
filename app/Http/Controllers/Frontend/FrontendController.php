@@ -25,8 +25,9 @@ class FrontendController extends Controller
         $categories = Category::with(['categoryTranslations' => function ($query) use ($locale) {
             $query->where('locale', $locale);
         }])->get();
+        $sliders = Slider::all();
         // return $posts;
-        return view('frontend.index', compact('sliders', 'categories', 'products', 'posts'));
+        return view('frontend.index', compact('sliders', 'categories', 'products', 'posts', 'sliders'));
     }
     public function categories()
     {

@@ -33,18 +33,10 @@ class ProductFormRequest extends FormRequest
                 'string',
                 'max:255'
             ],
-
-            'original_price' => [
-                'required',
-
-            ],
-            'selling_price' => [
-                'required',
-
-            ],
-            'quantity' => [
-                'required',
-                'integer',
+            'name' => [
+                'nullable',
+                'string',
+                'max:255'
             ],
             'trending' => [
                 'nullable',

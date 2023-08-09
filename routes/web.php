@@ -13,9 +13,11 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\VehicleController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 
 /*
@@ -51,6 +53,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/products', [FrontendProductController::class, 'index']);
     Route::get('/about', [FrontendAboutController::class, 'index']);
     Route::get('/contact', [FrontendController::class, 'contact']);
+    Route::post('/contact_send', [ContactController::class, 'send']);
     Route::get('/news', [FrontendPostController::class, 'index']);
     Route::get('/news/{slug}', [FrontendPostController::class, 'show']);
 });
@@ -99,6 +102,14 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/brands/edit/{brand}', 'edit');
         Route::put('/brands/{brand}', 'update');
     });
+    // vehicle Route
+    Route::controller(VehicleController::class)->group(function () {
+        Route::get('/vehicles', 'index');
+        Route::get('/vehicles/create', 'create');
+        Route::post('/vehicles', 'store');
+        Route::get('/vehicles/edit/{vehicle}', 'edit');
+        Route::put('/vehicles/{vehicle}', 'update');
+    });
     // Option Route
     Route::controller(OptionController::class)->group(function () {
         Route::get('/options', 'index');
@@ -134,11 +145,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/products/create', 'create');
         Route::post('/products', 'store');
         Route::get('/products/edit/{product}', 'edit');
-        Route::put('/products/{product}', 'update');
+        Route::put('/products/{product_id}', 'update');
         Route::get('/product-image/delete/{product_image_id}', 'destroyImage');
 
         Route::get('/products/show/{product_id}', 'show');
         Route::post('/products/add_translate', 'add_translate');
+        Route::get('/products/part/{product_id}', 'parts');
+        Route::post('/products/add_part', 'add_part');
         Route::get('/products/delete/{product_id}', 'destroy');
     });
     // Sliders Route

@@ -7,12 +7,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Brand;
 use App\Models\Product;
 use App\Http\Requests\ProductFormRequest;
+use App\Models\Brand;
 use App\Models\ProductImage;
 use App\Models\Production;
+use App\Models\ProductNumber;
 use App\Models\ProductTranslation;
+use App\Models\Vehicle;
 
 class ProductController extends Controller
 {
@@ -31,7 +33,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
-        $slugRequest = Str::slug($validatedData['slug']);
+        $slugRequest = Str::slug($validatedData['name']);
         $code = random_int(00, 99);
         $slug = $slugRequest . '-' . $code;
 
@@ -42,9 +44,7 @@ class ProductController extends Controller
             $product->slug = $slugRequest;
         }
         $product->production_id = $validatedData['production_id'];
-        $product->original_price = $validatedData['original_price'];
-        $product->selling_price = $validatedData['selling_price'];
-        $product->quantity = $validatedData['quantity'];
+        $product->name = $validatedData['name'];
         $product->trending = $request->trending == true ? '1' : '0';
         $product->status = $request->status == true ? '1' : '0';
         $product->save();
@@ -90,6 +90,33 @@ class ProductController extends Controller
         $product_translate->save();
         return redirect()->back()->with('message', 'Product Translate Has Added');
     }
+    // Parts Number
+    function parts(int $product_id)
+    {
+        $product = Product::findOrFail($product_id);
+        $parts = ProductNumber::where('product_id', $product_id)->orderBy('id', 'desc')->get();
+        $brands = Brand::all();
+        $vehicles = Vehicle::all();
+        return view('admin.products.parts', compact('product', 'parts', 'brands', 'vehicles'));
+    }
+    function add_part(Request $request)
+    {
+        $product_number = new ProductNumber();
+        $product_number->product_id = $request['product_id'];
+        $product_number->number = $request['number'];
+        $product_number->vendor_number = $request['vendor_number'];
+        $product_number->model_number = $request['model_number'];
+        $product_number->brand = implode(',', $request->brand);
+        $product_number->quantity = $request['quantity'];
+        $product_number->buy_price = $request['buy_price'];
+        $product_number->sell_price = $request['sell_price'];
+        $product_number->vehicle = implode(',', $request->vehicle);
+
+
+        $product_number->save();
+        return redirect()->back()->with('message', 'Product Number Has Added');
+    }
+    // End Part Number
     public function edit(int $product_id)
     {
         $categories = Category::all();
@@ -102,39 +129,33 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
-        $product = Production::findOrFail($validatedData['production_id'])
-            ->products()->where('id', $product_id)->first();
-        if ($product) {
-            $product->update([
-                'production_id' => $validatedData['production_id'],
-                'slug' => $validatedData['slug'],
-                'original_price' => $validatedData['original_price'],
-                'selling_price' => $validatedData['selling_price'],
-                'quantity' => $validatedData['quantity'],
-                'trending' => $request->trending == true ? '1' : '0',
-                'status' => $request->status == true ? '1' : '0',
-            ]);
+        $product = Product::findOrFail($product_id);
+        $product->production_id = $validatedData['production_id'];
+        $product->slug = $validatedData['slug'];
+        $product->name = $validatedData['name'];
+        $product->trending = $request->trending == true ? '1' : '0';
+        $product->status = $request->status == true ? '1' : '0';
 
-            if ($request->hasFile('image')) {
-                $uploadPath = 'uploads/products/';
-                $i =  1;
-                foreach ($request->file('image') as $imageFile) {
-                    $extention = $imageFile->getClientOriginalExtension();
-                    $filename = time() . $i++ . '.' . $extention;
-                    $imageFile->move($uploadPath, $filename);
-                    $finalImanePathName = $uploadPath  . $filename;
 
-                    $product->productImages()->create([
-                        'product_id' => $product->id,
-                        'image' => $finalImanePathName,
-                    ]);
-                }
+
+        if ($request->hasFile('image')) {
+            $uploadPath = 'uploads/products/';
+            $i =  1;
+            foreach ($request->file('image') as $imageFile) {
+                $extention = $imageFile->getClientOriginalExtension();
+                $filename = time() . $i++ . '.' . $extention;
+                $imageFile->move($uploadPath, $filename);
+                $finalImanePathName = $uploadPath  . $filename;
+
+                $product->productImages()->create([
+                    'product_id' => $product->id,
+                    'image' => $finalImanePathName,
+                ]);
             }
-
-            return redirect('admin/products')->with('message', 'Product Updated Succesfully!');
-        } else {
-            return redirect('admin/products')->with('message', 'No Such Product ID Found ');
         }
+
+        $product->update();
+        return redirect('admin/products')->with('message', 'Product Updated Succesfully!');
     }
     public function destroyImage(int $product_image_id)
     {

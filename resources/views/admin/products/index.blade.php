@@ -18,11 +18,8 @@
                     <tr>
                         <th width="5%">ID</th>
                         <th scope="col">Product</th>
-                        <th scope="col">Original Price</th>
-                        <th scope="col">Selling Price</th>
-                        <th scope="col">Stock</th>
                         <th scope="col">status</th>
-                        <th width="25%">Action</th>
+                        <th width="30%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +27,6 @@
                     <tr>
                         <td>{{$product->id}}</td>
                         <td>{{$product->slug}}</td>
-                        <td>{{number_format($product->original_price)}}</td>
-                        <td>{{number_format($product->selling_price)}}</td>
-                        <td>{{$product->quantity}}</td>
                         <td>
                             @if($product->status == 1)
                             <span class="badge bg-light-success text-success">Active</span>
@@ -41,6 +35,9 @@
                             @endif
                         </td>
                         <td>
+                            <a href="{{url('admin/products/part/' .$product->id)}}"
+                                class="btn btn-sm btn-info text-white"><i class="fa-solid fa-screwdriver-wrench"></i>
+                                Part Number</a>
                             <a href="{{url('admin/products/show/' .$product->id)}}"
                                 class="btn btn-sm btn-primary text-white"><i class="fa-solid fa-language"></i>
                                 Translate</a>

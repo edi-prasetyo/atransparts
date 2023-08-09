@@ -14,19 +14,10 @@ class Product extends Model
 
     protected $fillable = [
         'production_id',
-        'name',
         'slug',
-        'brand',
-        'short_description',
-        'description',
-        'original_price',
-        'selling_price',
-        'quantity',
+        'views',
         'trending',
-        'status',
-        'meta_title',
-        'meta_keyword',
-        'meta_description',
+        'status'
     ];
     public function productTranslations()
     {

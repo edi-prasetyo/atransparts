@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductNumber;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,7 @@ class ProductController extends Controller
         }])->where('slug', $products_slug)->first();
         $images = $product->productImages;
         // return $images;
+        $part_number = ProductNumber::where('product_id', $product->id)->orderBy('id', 'desc')->get();
 
         if (!Auth::check()) { //guest user identified by ip
             $cookie_name = (Str::replace('.', '', (request()->ip())) . '-' . $product->id);
@@ -50,12 +52,13 @@ class ProductController extends Controller
                     'product' => $product,
                     'images' => $images,
                     'header' => $header,
-                    'productSidebar' => $productSidebar
+                    'productSidebar' => $productSidebar,
+                    'part_number' => $part_number,
                 ])
                 ->withCookie($cookie); //store the cookie
         } else {
             // return $post;
-            return view('frontend.product.detail', compact('product', 'images', 'header', 'productSidebar'));
+            return view('frontend.product.detail', compact('product', 'images', 'header', 'productSidebar', 'part_number'));
         }
     }
 

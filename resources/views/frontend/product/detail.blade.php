@@ -5,7 +5,6 @@
 <div class="container my-5">
 
     <div class="row">
-
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-7">
@@ -15,8 +14,8 @@
                 </div>
 
                 <div class="col-md-5">
-                    <h3 class="card-title">{{$product->name}}</h3>
-                    <p>{{$product->short_description}}</p>
+                    {{-- <h3 class="card-title">{{$product->name}}</h3>
+                    <p>{{$product->short_description}}</p> --}}
 
                     <h2 class="mt-3 mb-3">
                         {{$product->productTranslations->first()->name}}
@@ -37,6 +36,7 @@
                                 <span class="bx bxs-star-half text-warning mx-1"></span>
                             </div>
                         </div>
+
                         <div class="flex-grow-1">
                             <div class="row align-items-center">
                                 <div class="col-4 text-end">
@@ -76,14 +76,52 @@
 
                         </div>
                     </div>
-
-
-                    <a href="https://wa.me/{{$option_nav->whatsapp}}?text=Halo%20Saya%20Ingin%20Informasi%20Tentang%20Produk%20**{{$product->productTranslations->first()->name}}**%20yang%20saya%20lihat%20di%20{{url(LaravelLocalization::getCurrentLocale().'/product/'.$product->slug)}}"
-                        class="btn btn-primary btn-rounded mt-3">{{__('general.buy')}}</a>
-
                 </div>
+
+                <p>{!!$product->productTranslations->first()->description!!}</p>
+
             </div>
-            <p>{!!$product->productTranslations->first()->description!!}</p>
+
+
+            <div class="card mb-5">
+                <div class="card-header">
+                    List Produk
+                </div>
+
+                <table class="table">
+
+                    <tbody>
+                        @foreach($part_number as $key => $part)
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="badge bg-primary">Nomor part </span>
+                                        <div class="text-dark"><span class="fw-bold">
+                                                {{$part->number}}</span></div>
+                                        {{$part->brand}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fw-bold">{{$part->model_number}}</div>
+                                        {{$part->vehicle}}
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="text-end">
+                                    <a href="https://wa.me/{{$option_nav->whatsapp}}?text=Halo%20Saya%20Ingin%20Informasi%20Tentang%20Produk%20**{{$product->productTranslations->first()->name}}**%20yang%20saya%20lihat%20di%20{{url(LaravelLocalization::getCurrentLocale().'/product/'.$product->slug)}} dengan produk number {{$part->number}}"
+                                        class="btn btn-primary btn-rounded mt-3">{{__('general.buy')}}</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+
+
         </div>
 
         <div class="col-md-3">
