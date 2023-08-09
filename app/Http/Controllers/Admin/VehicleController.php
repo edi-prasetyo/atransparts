@@ -12,9 +12,9 @@ class VehicleController extends Controller
 {
     public function index()
     {
-
+        $brands = Brand::all();
         $vehicles = Vehicle::orderBy('id', 'DESC')->paginate(10);
-        return view('admin.vehicle.index', compact('vehicles'));
+        return view('admin.vehicle.index', compact('vehicles', 'brands'));
     }
     public function create()
     {
