@@ -14,7 +14,7 @@
   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/offcanvas/offcanvas-navbar.css')}}" rel="stylesheet">
-  {{-- {!! ReCaptcha::htmlScriptTagJsApi() !!} --}}
+  {!! ReCaptcha::htmlScriptTagJsApi() !!}
 
 </head>
 
