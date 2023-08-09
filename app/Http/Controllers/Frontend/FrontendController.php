@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Category;
 use App\Models\Post;
@@ -26,8 +27,9 @@ class FrontendController extends Controller
             $query->where('locale', $locale);
         }])->get();
         $sliders = Slider::all();
+        $brands = Brand::all();
         // return $posts;
-        return view('frontend.index', compact('sliders', 'categories', 'products', 'posts', 'sliders'));
+        return view('frontend.index', compact('sliders', 'categories', 'products', 'posts', 'sliders', 'brands'));
     }
     public function categories()
     {

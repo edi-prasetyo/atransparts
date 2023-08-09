@@ -193,57 +193,15 @@
 
             <div class="col-md-5">
                 <div class="row ">
-
+                    @foreach($brands as $key => $brand)
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/nissan.png')}}">
+                                <img class="img-fluid" src="{{asset('uploads/brand/' . $brand->image)}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/toyota.png')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/mitsubishi.png')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/wuling.png')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/honda.png')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/daihatsu.png')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <img class="img-fluid" src="{{asset('uploads/logo/isuzu.png')}}">
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -263,7 +221,7 @@
                 <div class="col-md-8 text-dark">
                     <h1 class="ps-5 pe-5 pt-5 fw-bold">{{__('homepage.cta_title')}}
                     </h1>
-                    <p class="ps-5 pe-5 mb-5 mt-3">{{__('homepage.cta_desc')}} 
+                    <p class="ps-5 pe-5 mb-5 mt-3">{{__('homepage.cta_desc')}}
                     </p>
                     <a href="https://wa.me/{{$option_nav->whatsapp}}"
                         class="btn btn-success btn-lg ms-5 mb-3 ps-5 pe-5 pt-3 pb-3"><i class='bx bxl-whatsapp'></i>
