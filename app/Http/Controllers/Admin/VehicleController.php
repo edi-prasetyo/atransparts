@@ -13,7 +13,10 @@ class VehicleController extends Controller
     public function index()
     {
         $brands = Brand::all();
-        $vehicles = Vehicle::orderBy('id', 'DESC')->paginate(10);
+        $vehicles = Vehicle::select('vehicles.*', 'brands.name as brand_name')
+            ->leftJoin('brands', 'brands.id', '=', 'vehicles.brand_id')
+            ->orderBy('vehicles.id', 'DESC')
+            ->paginate(10);
         return view('admin.vehicle.index', compact('vehicles', 'brands'));
     }
     public function create()
@@ -23,8 +26,6 @@ class VehicleController extends Controller
     }
     public function store(Request $request)
     {
-
-
         $slugRequest = Str::slug($request['name']);
         $code = random_int(00, 99);
         $slug = $slugRequest . '-' . $code;

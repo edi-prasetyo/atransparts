@@ -66,6 +66,7 @@
                     <tr>
                         <th width="5%">ID</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Brand</th>
                         <th scope="col">Status</th>
                         <th width="20%">Action</th>
                     </tr>
@@ -75,6 +76,7 @@
                     <tr>
                         <td>{{$data->id}}</td>
                         <td>{{$data->name}}</td>
+                        <td>{{$data->brand_name}}</td>
                         <td>
                             @if($data->status == 1)
                             <span class="badge bg-light-success text-success">Active</span>
