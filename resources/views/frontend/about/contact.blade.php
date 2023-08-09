@@ -91,7 +91,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group row my-3">
 
                         <div class="col-md-6"> {!! htmlFormSnippet() !!} </div>
