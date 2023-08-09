@@ -49,10 +49,22 @@ class MenuController extends Controller
         $menu_translate->save();
         return redirect()->back()->with('message', 'Menu Has Added');
     }
-    function edit()
+    function edit(Menu $menu)
     {
+        $menus = Menu::all();
+        return view('admin.menu.edit', compact('menu', 'menus'));
     }
-    function update()
+    function update(MenuFormRequest $request, $menu)
     {
+        $validatedData = $request->validated();
+        $menu = Menu::findOrFail($menu);
+
+        $menu->slug = $validatedData['slug'];
+        $menu->link = $validatedData['link'];
+        $menu->parent_id = $validatedData['parent_id'];
+        $menu->position = $validatedData['position'];
+        $menu->status = $validatedData['status'] == true ? '1' : '0';
+        $menu->update();
+        return redirect('admin/menus')->with('message', 'Menu update Succesfully');
     }
 }
