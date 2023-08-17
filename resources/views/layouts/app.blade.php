@@ -10,6 +10,7 @@
   <meta name="keywords" content="@yield('meta_keyword')">
   <meta name="author" content="@yield('title')">
   <meta property="og:image" content="@yield('image')">
+  <link rel="shortcut icon" href="{{asset('uploads/logo/'.$option_nav->favicon)}}">
   <link rel="stylesheet" href="{{asset('assets/vendor/boxicon/css/boxicons.min.css')}}">
   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">

@@ -108,7 +108,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/vehicles/create', 'create');
         Route::post('/vehicles', 'store');
         Route::get('/vehicles/edit/{vehicle}', 'edit');
-        Route::put('/vehicles/{vehicle}', 'update');
+        Route::put('/vehicles/{vehicle_id}', 'update');
     });
     // Option Route
     Route::controller(OptionController::class)->group(function () {

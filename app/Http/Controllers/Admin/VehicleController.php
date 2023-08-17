@@ -41,6 +41,21 @@ class VehicleController extends Controller
         $vehicle->status = $request->status == true ? '1' : '0';
 
         $vehicle->save();
-        return redirect('admin/vehicles')->with('message', 'Brands Has Added');
+        return redirect('admin/vehicles')->with('message', 'Vehicle Has Added');
+    }
+    function edit(Vehicle $vehicle)
+    {
+        $brands = Brand::all();
+        return view('admin.vehicle.edit', compact('brands', 'vehicle'));
+    }
+    function update(Request $request, int $vehicle_id)
+    {
+        $vehicle = Vehicle::findOrFail($vehicle_id);
+
+        $vehicle->brand_id = $request['brand_id'];
+        $vehicle->name = $request['name'];
+        $vehicle->status = $request->status == true ? '1' : '0';
+        $vehicle->update();
+        return redirect('admin/vehicles')->with('message', 'Vehicle Has been Updated');
     }
 }
