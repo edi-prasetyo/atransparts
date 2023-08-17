@@ -88,8 +88,8 @@
                         <td>
                             <a href="{{url('admin/vehicles/edit/' .$data->id)}}"
                                 class="btn btn-sm btn-primary text-white">Edit</a>
-                            <a href="#" wire:click="deleteBrand({{$data->id}})" class="btn btn-sm btn-danger text-white"
-                                data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                            <a href="{{url('admin/vehicles/delete/' .$data->id)}}"
+                                class="btn btn-sm btn-danger text-white">Delete</a>
                         </td>
                     </tr>
                     @endforeach

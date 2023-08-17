@@ -9,8 +9,9 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <form action="{{url('admin/vehicles/')}}" method="POST">
+                <form action="{{url('admin/vehicles/' .$vehicle->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Brand</label>

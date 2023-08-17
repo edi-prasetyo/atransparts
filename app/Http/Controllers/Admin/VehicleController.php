@@ -58,4 +58,10 @@ class VehicleController extends Controller
         $vehicle->update();
         return redirect('admin/vehicles')->with('message', 'Vehicle Has been Updated');
     }
+    public function destroy(int $product_id)
+    {
+        $vehicle = Vehicle::findOrFail($product_id);
+        $vehicle->delete();
+        return redirect()->back()->with('message', 'vehicle and Image was Deleted!');
+    }
 }

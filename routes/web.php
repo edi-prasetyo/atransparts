@@ -109,6 +109,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('/vehicles', 'store');
         Route::get('/vehicles/edit/{vehicle}', 'edit');
         Route::put('/vehicles/{vehicle_id}', 'update');
+        Route::get('/vehicles/delete/{vehicle_id}', 'destroy');
     });
     // Option Route
     Route::controller(OptionController::class)->group(function () {
