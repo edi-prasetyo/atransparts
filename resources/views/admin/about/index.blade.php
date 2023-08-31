@@ -38,7 +38,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header bg-white">
                     About Translate
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header bg-white">
                     Translations
@@ -88,6 +88,7 @@
                                 <th width="5%">ID</th>
                                 <th width="5%">lang</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,6 +97,11 @@
                                 <td>{{$about_trans->id}}</td>
                                 <td>{{$about_trans->locale}} </td>
                                 <td>{{$about_trans->title}}</td>
+                                <td>
+                                    <a href="{{url('admin/abouts/edit_translate/' . $about_trans->id)}}"
+                                        class="btn btn-success btn-sm">Edit</a>
+                                    <a href="" class="btn btn-primary btn-sm">Hapus</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

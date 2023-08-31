@@ -213,3 +213,59 @@ input[type=number]:focus,
 .right-side{position: relative}
 .search-option{position: absolute;background-color: #000;overflow: hidden;align-items: center;color: #fff;width: 200px;height: 200px;border-radius: 49% 51% 50% 50% / 68% 69% 31% 32%;left: 30%;bottom: -250px;transition: all 0.5s;cursor: pointer}
 .buttons .btn{height: 50px;width: 150px;border-radius: 0px !important}
+
+/* Floating Button */
+.act-btn-map{
+  background:rgb(49, 105, 194);
+  display: block;
+  width: 90px;
+  height: 90px;
+  padding: 5px;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: ease all 0.3s;
+  position: fixed;
+  right: 0;
+  bottom:210px;
+}
+.act-btn-tokped{
+  background:green;
+  display: block;
+  width: 90px;
+  height: 90px;
+  padding: 5px;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: ease all 0.3s;
+  position: fixed;
+  right: 0;
+  bottom:120px;
+}
+.act-btn-shopee{
+  background:orangered;
+  display: block;
+  width: 90px;
+  height: 90px;
+  padding: 5px;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: ease all 0.3s;
+  position: fixed;
+  right: 0;
+  bottom:30px;
+}
+.act-btn-tokped:hover{background: rgb(14, 120, 59)}
+.act-btn-shopee:hover{background: orange}
+.act-btn-map:hover{background: rgb(21, 85, 146)}

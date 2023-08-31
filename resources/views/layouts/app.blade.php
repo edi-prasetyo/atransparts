@@ -25,6 +25,13 @@
 
     <main>
       @yield('content')
+      <a href="{{url('contact')}}" class="act-btn-map">
+        <img class="img-fluid" src="{{asset('uploads/logo/find.png')}}"> </a>
+      <a href="https://www.tokopedia.com/atrans" target="blank" class="act-btn-tokped">
+        <img class="img-fluid" src="{{asset('uploads/logo/tokopedia.png')}}"> </a>
+      <a href="#" class="act-btn-shopee">
+        <img class="img-fluid" src="{{asset('uploads/logo/shopee.png')}}"> </a>
+      </a>
     </main>
   </div>
   @include('layouts.inc.frontend.footer')

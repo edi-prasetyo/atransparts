@@ -120,7 +120,9 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     // About Route
     Route::controller(AboutController::class)->group(function () {
         Route::get('/abouts', 'index');
-        Route::post('/abouts/add_translate', 'add_translate');
+        Route::post('/abouts/add_translate/{translate_id}', 'add_translate');
+        Route::get('/abouts/edit_translate/{translate_id}', 'edit_translate');
+        Route::post('/abouts/update_translate/{translate_id}', 'update_translate');
         Route::post('/abouts', 'update');
     });
     // Menu Route

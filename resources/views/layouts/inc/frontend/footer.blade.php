@@ -8,7 +8,7 @@
                     {{$about_nav->aboutTranslations->first()->content}}
                 </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h4 class="footer-heading">Quick Links</h4>
                 <div class="footer-underline"></div>
                 <div class="mb-2">
@@ -22,18 +22,8 @@
                 @endforeach
 
             </div>
-            <div class="col-md-3">
-                <h4 class="footer-heading">{{__('general.shop_footer')}}</h4>
-                <div class="footer-underline"></div>
 
-                @foreach($product_nav as $product)
-                <div class="mb-2"><a class="dropdown-item"
-                        href="{{url(LaravelLocalization::getCurrentLocale(). '/product/' .$product->slug)}}">{{$product->productTranslations->first()->name}}</a>
-                </div>
-                @endforeach
-
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <h4 class="footer-heading">{{__('general.address')}}</h4>
                 <div class="footer-underline"></div>
                 <div class="mb-2">
@@ -58,6 +48,15 @@
                     </a>
                 </div>
             </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">{{__('general.shop_footer')}}</h4>
+                <div class="footer-underline"></div>
+                <div class="col-md-6">
+                    <a href="https://www.tokopedia.com/atrans" target="blank"> <img class="mb-2 img-fluid"
+                            src="{{asset('uploads/logo/tokopedia-logo.png')}}"></a>
+                    <a href=""> <img class="img-fluid" src="{{asset('uploads/logo/shopee-logo.png')}}"> </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -69,11 +68,11 @@
             </div>
             <div class="col-md-4">
                 <div class="social-media">
-                    Get Connected:
-                    <a href=""><i class="fab fa-facebook"></i></a>
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                    <a href=""><i class="fab fa-youtube"></i></a>
+                    <span class="text-white"> Get Connected :</span>
+                    <a href=""><i class='bx bxl-facebook'></i></a>
+                    <a href=""><i class='bx bxl-twitter'></i></a>
+                    <a href=""><i class='bx bxl-instagram'></i></a>
+                    <a href=""><i class='bx bxl-youtube'></i></a>
                 </div>
             </div>
         </div>
