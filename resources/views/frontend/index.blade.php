@@ -264,7 +264,7 @@
     $(document).ready(function () {
         $.ajax({
             type: 'GET',
-            url: 'https://rentalmobilmurahjakarta.com/wp-json/wp/v2/posts?per_page=4&orderby=id',
+            url: 'https://atransparts.com/blog/wp-json/wp/v2/posts?per_page=4&orderby=id',
 
             success: function (data) {
                 var posts_html = '';
