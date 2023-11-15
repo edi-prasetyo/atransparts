@@ -134,6 +134,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/menus/show/{menu_id}', 'show');
         Route::post('/menus/add_translate', 'add_translate');
         Route::put('/menus/{menu}', 'update');
+        Route::get('/menus/delete/{menu_id}', 'destroy');
     });
     Route::controller(ProductionController::class)->group(function () {
         Route::get('/productions', 'index');

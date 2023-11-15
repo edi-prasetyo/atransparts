@@ -67,4 +67,10 @@ class MenuController extends Controller
         $menu->update();
         return redirect('admin/menus')->with('message', 'Menu update Succesfully');
     }
+    public function destroy(int $menu_id)
+    {
+        $menu = Menu::findOrFail($menu_id);
+        $menu->delete();
+        return redirect()->back()->with('message', 'Product and Image was Deleted!');
+    }
 }

@@ -44,9 +44,8 @@
                                 class="btn btn-sm btn-info text-white">Translate</a>
                             <a href="{{url('admin/menus/edit/' .$menu->id)}}"
                                 class="btn btn-sm btn-primary text-white">Edit</a>
-                            <a href="#" wire:click="deleteCategory({{$menu->id}})"
-                                class="btn btn-sm btn-danger text-white" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">Delete</a>
+                            <a href="{{url('admin/menus/delete/' .$menu->id)}}"
+                                class="btn btn-sm btn-danger text-white">Delete</a>
                         </td>
                     </tr>
                     @endforeach
