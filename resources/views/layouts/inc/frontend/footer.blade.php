@@ -20,6 +20,8 @@
                         href="{{url(LaravelLocalization::getCurrentLocale() .'/'.$menu->link)}}">{{$menu->menuTranslations->first()->name}}</a>
                 </div>
                 @endforeach
+                <div class="mb-2"> <a class="nav-link" href="{{url('blog')}}">Blog</a>
+                </div>
 
             </div>
 
