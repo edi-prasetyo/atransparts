@@ -1,5 +1,5 @@
 <div class="footer-area mt-auto">
-    <div class="container">
+    <div class="container col-md-9 mx-auto">
         <div class="row">
             <div class="col-md-3">
                 <h4 class="footer-heading">About Us</h4>
@@ -9,7 +9,7 @@
                 </p>
             </div>
             <div class="col-md-2">
-                <h4 class="footer-heading">Quick Links</h4>
+                <h4 class="footer-heading">Links</h4>
                 <div class="footer-underline"></div>
                 <div class="mb-2">
                     <a class="nav-link active" aria-current="page"
@@ -61,7 +61,7 @@
     </div>
 </div>
 <div class="copyright-area">
-    <div class="container">
+    <div class="container col-md-9 mx-auto">
         <div class="row">
             <div class="col-md-8">
                 <p class=""> &copy; 2022 - {{date('Y')}} {{$option_nav->tagline}}. All rights reserved.</p>

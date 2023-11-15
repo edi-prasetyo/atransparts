@@ -1,84 +1,5 @@
-<nav class="bg-light-emphasis border-bottom">
-    <div class="top-navbar bg-light py-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 my-auto d-none d-sm-none d-md-block d-lg-block">
-                    <i class='bx bxl-whatsapp fs-5'></i> {{$option_nav->whatsapp}} <i
-                        class='bx bx-envelope ms-5 fs-5'></i>
-                    {{$option_nav->email}}
-                </div>
-                <div class="col-md-6 my-auto">
-                    <ul class="nav justify-content-end">
-
-                        {{-- <button type="button" class="btn btn-outline-secondary"><i
-                                class='bx bxl-facebook-circle'></i></button>
-                        <button type="button" class="btn btn-outline-secondary"> <i
-                                class='bx bxl-instagram-alt'></i></i></button>
-                        <button type="button" class="btn btn-outline-secondary"><i
-                                class='bx bxl-tiktok'></i></i></button> --}}
-
-
-
-                        {{-- <li class="nav-item">
-                            <a class="nav-link border-end" aria-current="page" href="#">
-                                EN</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">ID</a>
-                        </li> --}}
-
-                        {{-- @guest
-                        @if (Route::has('register'))
-                        <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary" href="{{ route('register') }}"><i class='bx bx-user'></i>
-                                {{
-                                __('Register') }}</a>
-                        </li>
-                        @endif
-
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="btn btn-primary text-white px-3" href="{{ route('login') }}"><i
-                                    class='bx bx-log-in'></i> {{
-                                __('Login') }}
-                            </a>
-                        </li>
-                        @endif
-                        @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                                @if(Auth::user()->role_as == 1 || (Auth::user()->role_as == 2))
-                                <a class="dropdown-item" href="{{ url('admin/dashboard') }}">
-                                    Dashboard
-                                </a>
-                                @else
-
-                                @endif
-                            </div>
-                        </li>
-                        @endguest --}}
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
 <nav class="navbar bg-white navbar-expand-lg shadow-sm">
-    <div class="container">
+    <div class="container col-md-9 mx-auto">
         <a class="navbar-brand d-block d-sm-block" href="{{url(LaravelLocalization::getCurrentLocale())}}">
             <img src="{{asset('uploads/logo/' .$option_nav->logo)}}">
         </a>
@@ -97,16 +18,6 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav flex-grow-1 pe-3">
-                    {{-- <li class="nav-item w-75">
-                        <form role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control pe-5 pe-3" placeholder="Cari Produk"
-                                    aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <button class="btn btn-primary" type="button" id="button-addon2"><i
-                                        class='bx bx-search'></i></button>
-                            </div>
-                        </form>
-                    </li> --}}
 
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
@@ -138,6 +49,9 @@
 
                     @endforeach
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/blog')}}">Blog</a>
+                    </li>
 
                 </ul>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">

@@ -86,7 +86,7 @@
 
 
 <section class="py-2">
-    <div class="container">
+    <div class="container col-md-9 mx-auto">
 
         <div class="d-flex justify-content-center align-items-center">
             <h1 class="fw-bold text-body-emphasis">{{__('homepage.our_product')}}</h1>
@@ -99,7 +99,7 @@
         <div class="row">
 
             @foreach($products as $product)
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card mb-3">
 
                     <a href="{{url('product/'.$product->slug)}}" class="text-muted text-decoration-none">
@@ -137,7 +137,7 @@
 </section>
 
 
-<section class="my-5">
+<section class="my-3">
     <div class="d-flex justify-content-center align-items-center">
         <h1 class="fw-bold text-body-emphasis">{{__('homepage.latest_news')}}</h1>
     </div>
@@ -145,44 +145,68 @@
             {{__('homepage.news_desc')}}
         </span>
     </div>
-    <div class="container">
-        <div class="row">
-            @foreach($posts as $post)
-            <div class="col-md-4">
-                <div class="card border-0 p-3">
-                    <div class="post-img-cover rounded">
-                        <div class="post-img-frame">
-                            <img src="{{asset('uploads/posts/' .$post->image)}}" class="rounded" alt="...">
-                        </div>
-                    </div>
+    <div class="container col-md-9 mx-auto">
+        <div id="posts" class="row">
+            <div class="col-md-3">
+                <div class="card border-0 shadow loading">
+                    <div class="image-loading">
 
-                    <h4 class="card-title my-3">
-                        <a class="link-dark text-decoration-none"
-                            href="{{url(LaravelLocalization::getCurrentLocale() .'/news/'. $post->slug)}}">
-                            {{$post->postTranslations->first()->title}}
-                        </a>
-                    </h4>
-                    <p class="card-text text-muted">
-                        {{Str::limit(strip_tags($post->postTranslations->first()->content),80)}}</p>
-                    <div class="d-flex justify-content-between align-items-start text-muted">
-                        <div class="date">
-                            <i class='bx bx-calendar'></i> <small>{{date('j M Y',
-                                strtotime($post->created_at))}}</small>
-                        </div>
-                        <div class="view">
-                            <i class='bx bx-show'></i> <small>{{$post->views}} View </small>
+                    </div>
+                    <div class="content-loading">
+                        <h4></h4>
+                        <div class="description-loading">
+
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
+            <div class="col-md-3">
+                <div class="card border-0 shadow loading">
+                    <div class="image-loading">
+
+                    </div>
+                    <div class="content-loading">
+                        <h4></h4>
+                        <div class="description-loading">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow loading">
+                    <div class="image-loading">
+
+                    </div>
+                    <div class="content-loading">
+                        <h4></h4>
+                        <div class="description-loading">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow loading">
+                    <div class="image-loading">
+
+                    </div>
+                    <div class="content-loading">
+                        <h4></h4>
+                        <div class="description-loading">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
 
 <section>
-    <div class="container px-4 py-5">
+    <div class="container px-4 py-3 pb-5 col-md-9 mx-auto">
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div class="col-md-7 d-flex flex-column align-items-start gap-2">
                 <h1 class="fw-bold text-body-emphasis">{{__('homepage.merek_title')}}</h1>
@@ -233,4 +257,29 @@
 </section>
 
 
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'https://rentalmobilmurahjakarta.com/wp-json/wp/v2/posts?per_page=4&orderby=id',
+
+            success: function (data) {
+                var posts_html = '';
+                $.each(data, function (index, post) {
+                    posts_html += '<div class="col-md-3"><div class="card mb-3"><img class="img-fluid" src="' + post.yoast_head_json.og_image[0].url + '">';
+                    posts_html += '<div class="card-body"><a class="text-decoration-none text-muted" href="' + post.link + '"><h4>' + post.title.rendered + '</h4></a></div>';
+                    posts_html += '<div class="card-footer bg-white text-muted"><p> <i class="bx bx-user me-3"></i>' + post.yoast_head_json.author + '</p></div></div></div>';
+                    
+                });
+                $('#posts').html(posts_html);
+            },
+            error: function (request, status, error) {
+                alert(error);
+            }
+        });
+    });
+</script>
 @endsection
