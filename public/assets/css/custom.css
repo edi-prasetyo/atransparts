@@ -155,6 +155,9 @@ input[type=number]:focus,
 
   .navbar{
     min-height: 80px;
+    font-size: 18px;
+    font-weight: 600;
+   
   }
   /* Thumb Image */
   .card-img-cover{

@@ -1,7 +1,7 @@
 <nav class="navbar bg-white navbar-expand-lg shadow-sm">
     <div class="container col-md-9 mx-auto">
-        <a class="navbar-brand d-block d-sm-block" href="{{url(LaravelLocalization::getCurrentLocale())}}">
-            <img src="{{asset('uploads/logo/' .$option_nav->logo)}}">
+        <a class="navbar-brand d-block d-sm-block me-5" href="{{url(LaravelLocalization::getCurrentLocale())}}">
+            <img width="200" src="{{asset('uploads/logo/' .$option_nav->logo)}}">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
             aria-controls="offcanvasNavbar2">
