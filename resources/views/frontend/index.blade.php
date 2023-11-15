@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <div class="mb-4 text-center text-xl-start px-md-8 px-lg-19 px-xl-0 text-white">
                     <!-- Caption -->
-                    <h1 class="display-3 fw-bold mb-3 ls-sm ">
+                    <h1 class="display-4 fw-bold mb-3 ls-sm ">
                         {{__('homepage.hero_title')}}
                     </h1>
                     <p class="mb-6 lead pe-lg-6">
