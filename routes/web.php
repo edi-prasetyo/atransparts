@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductionController;
 use App\Http\Controllers\Admin\ProductController;
@@ -157,6 +158,16 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/products/part/{product_id}', 'parts');
         Route::post('/products/add_part', 'add_part');
         Route::get('/products/delete/{product_id}', 'destroy');
+    });
+    // Customer Route
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/customers', 'index');
+        Route::get('/customers/create', 'create');
+        Route::post('/customers', 'store');
+        Route::get('/customers/edit/{user}', 'edit');
+        Route::put('/customers/{user_id}', 'update');
+        Route::get('/products/show/{user_id}', 'show');
+        Route::get('/products/delete/{user_id}', 'destroy');
     });
     // Sliders Route
     Route::controller(SliderController::class)->group(function () {
