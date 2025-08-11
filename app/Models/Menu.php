@@ -23,4 +23,20 @@ class Menu extends Model
     {
         return $this->hasMany(MenuTranslation::class);
     }
+
+    public function getNameAttribute()
+    {
+        return $this->getTranslatedField('name');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->getTranslatedField('description');
+    }
+    public function getTranslatedField($field)
+    {
+        $translation = $this->menuTranslations->first();
+
+        return $translation ? $translation->{$field} : null;
+    }
 }

@@ -9,4 +9,11 @@ class AboutTranslation extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    protected $fillable = [
+        'about_id',
+        'locale',
+        'title',
+        'content',
+    ];
 }

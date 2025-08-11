@@ -10,11 +10,16 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\Brand;
+use App\Models\ProductBrand;
 use App\Models\ProductImage;
 use App\Models\Production;
 use App\Models\ProductNumber;
 use App\Models\ProductTranslation;
+use App\Models\Shop;
+use App\Models\Stock;
+use App\Models\StockLog;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -65,7 +70,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('admin/products/show/' . $product->id)->with('message', 'Product Added Succesfully!');
+        return redirect('admin/products/' . $product->id)->with('message', 'Product Added Succesfully!');
     }
     function show(int $product_id)
     {
@@ -96,26 +101,78 @@ class ProductController extends Controller
         $product = Product::findOrFail($product_id);
         $parts = ProductNumber::where('product_id', $product_id)->orderBy('id', 'desc')->get();
         $brands = Brand::all();
+        $productBrands = ProductBrand::all();
         $vehicles = Vehicle::all();
-        return view('admin.products.parts', compact('product', 'parts', 'brands', 'vehicles'));
+        return view('admin.products.parts', compact('product', 'parts', 'brands', 'vehicles', 'productBrands'));
     }
-    function add_part(Request $request)
+    public function add_part(Request $request)
     {
-        $product_number = new ProductNumber();
-        $product_number->product_id = $request['product_id'];
-        $product_number->number = $request['number'];
-        $product_number->vendor_number = $request['vendor_number'];
-        $product_number->model_number = $request['model_number'];
-        $product_number->brand = implode(',', $request->brand);
-        $product_number->quantity = $request['quantity'];
-        $product_number->buy_price = $request['buy_price'];
-        $product_number->sell_price = $request['sell_price'];
-        $product_number->vehicle = implode(',', $request->vehicle);
+        $validated = $request->validate([
+            'product_id'       => 'required|exists:products,id',
+            'number'           => 'required|string|max:255',
+            'vendor_number'    => 'nullable|string|max:255',
+            'model_number'     => 'nullable|string|max:255',
+            'brand'            => 'required|array',
+            'brand.*'          => 'string|max:255',
+            'product_brand_id' => 'required',
+            'buy_price'        => 'required|numeric|min:0',
+            'sell_price'       => 'required|numeric|min:0',
+            'vehicle'          => 'required|array',
+            'vehicle.*'        => 'string|max:255',
+            'initial_quantity' => 'nullable|integer|min:0', // optional stok awal
+        ]);
 
+        DB::beginTransaction();
 
-        $product_number->save();
-        return redirect()->back()->with('message', 'Product Number Has Added');
+        try {
+            // 1. Simpan ke product_numbers
+            $productNumber = new ProductNumber();
+            $productNumber->product_id    = $validated['product_id'];
+            $productNumber->number        = $validated['number'];
+            $productNumber->vendor_number = $validated['vendor_number'] ?? null;
+            $productNumber->model_number  = $validated['model_number'] ?? null;
+            $productNumber->brand         = implode(',', $validated['brand']);
+            $productNumber->buy_price     = $validated['buy_price'];
+            $productNumber->product_brand_id     = $validated['product_brand_id'];
+            $productNumber->sell_price    = $validated['sell_price'];
+            $productNumber->vehicle       = implode(',', $validated['vehicle']);
+            $productNumber->save();
+
+            // 2. Ambil semua shop
+            $shops = Shop::all();
+
+            foreach ($shops as $shop) {
+                $stock = new Stock();
+                $stock->shop_id           = $shop->id;
+                $stock->product_id        = $validated['product_id'];
+                $stock->product_number_id = $productNumber->id;
+                $stock->quantity          = $validated['initial_quantity'] ?? 0;
+                $stock->save();
+
+                // Optional: log stok awal
+                StockLog::create([
+                    'stock_id' => $stock->id,
+                    'shop_id' => $shop->id,
+                    'product_id' => $stock->product_id ?? null,
+                    'product_number_id' => $stock->product_number_id,
+                    'user_id' => auth()->id(),
+                    'type' => 'in',
+                    'quantity' => $stock->quantity,
+                    'note' => 'Initial stock for new product part',
+                    'date_created' => now(),
+                    'order_id' => null, // Set to null if not applicable
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->back()->with('message', 'Product Number and Stock for all shops added.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => 'Failed to add part: ' . $e->getMessage()]);
+        }
     }
+
+
     // End Part Number
     public function edit(int $product_id)
     {
@@ -166,9 +223,9 @@ class ProductController extends Controller
         $productImage->delete();
         return redirect()->back()->with('message', 'Product Image Deleted!');
     }
-    public function destroy(int $product_id)
+    public function destroy($id)
     {
-        $product = Product::findOrFail($product_id);
+        $product = Product::findOrFail($id);
         if ($product->productImages) {
             foreach ($product->productImages as $image) {
                 if (File::exists($image->image)) {

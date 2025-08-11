@@ -2,7 +2,8 @@
     <div class="sidebar-heading text-transparent"> </div>
     <div class="py-4 px-3">
         <div class="media">
-            <img src="{{asset('uploads/user/9.png')}}" alt="..." width="65" class="mr-3 rounded-circle shadow-sm">
+            <img src="{{ asset('uploads/user/9.png') }}" alt="..." width="65"
+                class="mr-3 rounded-circle shadow-sm">
             <div class="media-body my-3">
                 <h5 class="m-0 text-muted">Nama</h5>
                 <small class="font-weight-light mb-0 text-success"><i class="fas fa-circle text-success"></i>
@@ -10,8 +11,10 @@
             </div>
         </div>
     </div>
-    <p class="text-muted font-weight-bold text-uppercase px-3 small pb-2 mb-0"><b>Main</b></p>
-    <ul class="nav flex-column  mb-0">
+    {{-- <p class="text-muted font-weight-bold text-uppercase px-3 small pb-2 mb-0"><b>Main</b></p> --}}
+
+
+    {{-- <ul class="nav flex-column  mb-0">
         <li class="nav-item ">
             <a href="{{url('admin/dashboard')}}"
                 class="nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
@@ -56,8 +59,8 @@
         <p class="text-muted font-weight-bold text-uppercase px-3 small py-2 mb-0"><b>Web Front</b></p>
 
         <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between 
-                
+            <a class="nav-link d-flex justify-content-between
+
                 " data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                 aria-controls="collapseExample">
                 <span><i class="feather-airplay mr-3  fa-fw"></i> Homepage </span> <i
@@ -80,5 +83,39 @@
                 Profile Web
             </a>
         </li>
-    </ul>
+    </ul> --}}
+
+    @php
+        $menus = auth()->user()->accessibleMenus();
+    @endphp
+
+    @foreach ($menus as $groupName => $groupMenus)
+        <p class="text-muted font-weight-bold text-uppercase px-3 small pb-2 mb-0"><b>{{ $groupName }}</b></p>
+        <ul class="nav flex-column mb-0">
+            @foreach ($groupMenus as $menu)
+                <li class="nav-item">
+                    <a href="{{ $menu->route_name ? route($menu->route_name) : '#' }}"
+                        class="nav-link {{ request()->routeIs($menu->route_name) ? 'active' : '' }}">
+                        <i class="{{ $menu->icon }} fa-fw"></i>
+                        {{ $menu->title }}
+                    </a>
+                </li>
+
+                @if ($menu->children->isNotEmpty())
+                    <ul class="collapse" id="collapse_{{ $menu->id }}">
+                        @foreach ($menu->children as $child)
+                            <li class="nav-child">
+                                <a href="{{ $child->route_name ? route($child->route_name) : '#' }}" class="nav-link">
+                                    <i class="fa-solid fa-caret-right mr-3 fa-fw"></i>
+                                    {{ $child->title }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            @endforeach
+        </ul>
+    @endforeach
+
+
 </div>

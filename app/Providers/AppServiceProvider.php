@@ -37,9 +37,11 @@ class AppServiceProvider extends ServiceProvider
             $locale = app()->currentLocale();
             $view
                 ->with('headers', Slider::where('type', 1)->get())
-                ->with('menu_nav', Menu::with(['menuTranslations' => function ($query) use ($locale) {
-                    $query->where('locale', $locale);
-                }])->orderBy('position', 'asc')->get())
+                ->with('menu_nav', Menu::with([
+                    'menuTranslations' => function ($query) use ($locale) {
+                        $query->where('locale', $locale);
+                    }
+                ])->orderBy('position', 'asc')->get())
                 ->with('product_nav', Product::with(['productTranslations' => function ($query) use ($locale) {
                     $query->where('locale', $locale);
                 }])->orderBy('id', 'asc')->get())

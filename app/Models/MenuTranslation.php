@@ -9,4 +9,9 @@ class MenuTranslation extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = [
+        'menu_id',
+        'locale',
+        'name',
+    ];
 }

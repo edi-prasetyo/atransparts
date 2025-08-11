@@ -3,51 +3,77 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\UserDetail;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Customer;
+use App\Models\ShopUser;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = User::where('role_as', 3)->paginate(10);
+        $query = Customer::orderBy('id', 'desc')->with('shop')->withCount('orders');;
+
+
+        // Ambil shop_id dari relasi shop_users
+        $shopId = ShopUser::where('user_id', Auth::id())
+            ->value('shop_id');
+
+        if ($shopId) {
+            $query->where('shop_id', $shopId);
+        }
+
+        $customers = $query->paginate(5);
+        // return $customers;
+
         return view('admin.customer.index', compact('customers'));
     }
-    public function create()
+    public function autocomplete(Request $request)
     {
-        return view('admin.customer.create');
+        $query = $request->get('q');
+
+        $results = Customer::where(function ($q) use ($query) {
+            $q->where('full_name', 'like', '%' . $query . '%')
+                ->orWhere('phone', 'like', '%' . $query . '%');
+        })
+            ->select('id', 'full_name', 'phone', 'address')
+            ->limit(10)
+            ->get();
+
+        return response()->json($results);
     }
+
     public function store(Request $request)
     {
-        $password = 'Customer&*?$@)';
-        $user = new User();
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'phone' => 'nullable|string|unique:customers,phone',
+            'address' => 'nullable|string',
+        ]);
 
-        $user->name = $request['name'];
-        $user->email = $request['email'];
-        $user->password = Hash::make($password);
-        $user->role_as = 3;
-        $user->save();
+        Customer::create($request->only('full_name', 'phone', 'address'));
 
-        $customer = new UserDetail();
-        $customer->user_id = $user->id;
-        $customer->province_id = $request['province_id'];
-        $customer->city_id = $request['city_id'];
-        $customer->company_name = $request['company_name'];
-        $customer->company_address = $request['company_address'];
-
-        $customer->save();
-
-        return redirect('admin/customers')->with('message', 'data Berhasil di Input');
+        return redirect()->back()->with('success', 'Customer created successfully.');
     }
-    public function edit(Request $request)
+
+    public function update(Request $request, Customer $customer)
     {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'phone' => 'nullable|string|unique:customers,phone,' . $customer->id,
+            'address' => 'nullable|string',
+        ]);
+
+        $customer->update($request->only('full_name', 'phone', 'address'));
+
+        return redirect()->back()->with('success', 'Customer updated successfully.');
     }
-    public function update()
+
+    public function destroy(Customer $customer)
     {
-    }
-    public function destroy()
-    {
+        $customer->delete();
+        return redirect()->back()->with('success', 'Customer deleted.');
     }
 }

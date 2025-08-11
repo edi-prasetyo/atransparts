@@ -1035,13 +1035,13 @@ a:link {
 }
 
 .card .card-image-overflow {
- 
+
     position: relative;
     overflow: hidden;
     margin-left:30%;
     margin-right: 30%;
     margin-top: -30px;
-    
+
     /* box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); */
 }
 /* Card News thumb */
@@ -1055,3 +1055,5 @@ a:link {
     border-radius: 6px;
     box-shadow: 0 16px 15px -10px rgba(0, 0, 0, 0.07), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
+
+

@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,5 +45,23 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof HttpException && $exception->getStatusCode() === 403) {
+            if ($request->ajax() || $request->wantsJson()) {
+                // Kalau request ajax, return json pesan error
+                return response()->json([
+                    'message' => 'Anda tidak memiliki Akses untuk halaman ini'
+                ], 403);
+            }
+
+            // Kalau request biasa, bisa lempar view khusus
+            return response()->view('admin.errors.custom403', ['message' => 'Anda tidak memiliki Akses untuk halaman ini'], 403);
+        }
+
+        return parent::render($request, $exception);
     }
 }

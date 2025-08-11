@@ -6,7 +6,7 @@
                 <div class="footer-underline"></div>
                 <p>
 
-                    {{ $about_nav->aboutTranslations->first()->content }}
+                    {!! $about_nav->content !!}
                 </p>
             </div>
             <div class="col-md-2">
@@ -18,7 +18,7 @@
                 </div>
                 @foreach ($menu_nav as $menu)
                     <div class="mb-2"> <a class="nav-link"
-                            href="{{ url(LaravelLocalization::getCurrentLocale() . '/' . $menu->link) }}">{{ $menu->menuTranslations->first()->name }}</a>
+                            href="{{ url(LaravelLocalization::getCurrentLocale() . '/' . $menu->link) }}">{{ $menu->name ?? '-' }}</a>
                     </div>
                 @endforeach
                 <div class="mb-2"> <a class="nav-link" href="{{ url('blog') }}">Blog</a>

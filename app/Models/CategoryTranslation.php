@@ -10,4 +10,14 @@ class CategoryTranslation extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'category_id',
+        'locale',
+        'name',
+        'description',
+        'meta_title',
+        'meta_description',
+        'meta_keyword',
+    ];
 }

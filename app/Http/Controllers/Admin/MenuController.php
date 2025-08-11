@@ -12,7 +12,7 @@ class MenuController extends Controller
 {
     function index()
     {
-        $menus = Menu::orderBy('id', 'asc')->paginate(5);
+        $menus = Menu::orderBy('id', 'asc')->paginate(10);
         return view('admin.menu.index', compact('menus'));
     }
     function create()
@@ -33,10 +33,10 @@ class MenuController extends Controller
         $menu->save();
         return redirect('admin/menus/show/' . $menu->id)->with('message', 'Menu Has Added');
     }
-    function show(int $menu_id)
+    function show($id)
     {
-        $menu = Menu::findOrFail($menu_id);
-        $menuTranslate = MenuTranslation::where('menu_id', $menu->id)->get();
+        $menu = Menu::findOrFail($id);
+        $menuTranslate = MenuTranslation::where('menu_id', $id)->get();
         // return $menu;
         return view('admin.menu.show', compact('menu', 'menuTranslate'));
     }

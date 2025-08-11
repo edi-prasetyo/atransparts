@@ -15,11 +15,22 @@ class AdminMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+    // public function handle(Request $request, Closure $next)
+    // {
+    //     if (Auth::user()->role_as == '3' || Auth::user()->role_as == '4') {
+    //         return redirect('/member')->with('status', 'Access Denied. As you are not admin');
+    //     }
+    //     return $next($request);
+    // }
+
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_as == '3' || Auth::user()->role_as == '4') {
-            return redirect('/member')->with('status', 'Access Denied. As you are not admin');
+        $user = Auth::user();
+
+        if (!$user || !$user->roles()->whereIn('name', ['superadmin', 'admin'])->exists()) {
+            return redirect('/member')->with('status', 'Access Denied. You are not admin.');
         }
+
         return $next($request);
     }
 }

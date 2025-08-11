@@ -76,7 +76,7 @@ class ProductController extends Controller
                     "name" => $product->name,
                     "quantity" => 1,
                     "price" => $product->selling_price,
-                    "photo" => $product->productImages[0]->image
+                    "photo" => $product->productImages[0]->image ?? null
                 ]
             ];
             session()->put('cart', $cart);

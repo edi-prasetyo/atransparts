@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Production extends Model
 {
     use HasFactory;
+    protected $fillable = ['slug', 'name', 'country', 'image', 'status'];
 }

@@ -21,7 +21,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'role_as',
+        'phone',
+        'email_verified_at',
+
     ];
 
     /**
@@ -42,4 +44,22 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function shop()
+    {
+        return $this->belongsToMany(Shop::class, 'shop_users')->withTimestamps();
+    }
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_users');
+    }
+
+    public function accessibleMenus()
+    {
+        return MenuAdmin::whereHas('roles', function ($q) {
+            $q->whereIn('roles.id', $this->roles->pluck('id'));
+        })->with('children')->whereNull('parent_id')->orderBy('order')->get()->groupBy('group');
+    }
 }
