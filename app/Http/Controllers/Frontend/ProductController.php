@@ -37,7 +37,9 @@ class ProductController extends Controller
         }])->where('slug', $products_slug)->first();
         $images = $product->productImages;
         // return $images;
-        $part_number = ProductNumber::where('product_id', $product->id)->orderBy('id', 'desc')->get();
+        $part_number = ProductNumber::where('product_id', $product->id)
+            ->with(['productBrand'])
+            ->orderBy('id', 'desc')->get();
 
         if (!Auth::check()) { //guest user identified by ip
             $cookie_name = (Str::replace('.', '', (request()->ip())) . '-' . $product->id);

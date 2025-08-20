@@ -50,7 +50,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'product-brands.index',
             'icon' => 'feather-tag',
             'group' => 'Sales',
-            'order' => 4,
+            'order' => 5,
             'parent_id' => null,
         ]);
         $stock = MenuAdmin::create([
@@ -58,7 +58,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'stocks.index',
             'icon' => 'feather-package',
             'group' => 'Sales',
-            'order' => 5,
+            'order' => 6,
             'parent_id' => null,
         ]);
 
@@ -67,7 +67,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'stocks.index_shop',
             'icon' => 'feather-package',
             'group' => 'Sales',
-            'order' => 6,
+            'order' => 7,
             'parent_id' => null,
         ]);
 
@@ -76,15 +76,23 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'reports.order',
             'icon' => 'feather-pie-chart',
             'group' => 'Sales',
-            'order' => 6,
+            'order' => 8,
             'parent_id' => null,
         ]);
         $stock = MenuAdmin::create([
             'title' => 'Laporan Stok',
             'route_name' => 'reports.stock',
-            'icon' => 'pie-chart',
+            'icon' => 'feather-pie-chart',
             'group' => 'Sales',
-            'order' => 6,
+            'order' => 9,
+            'parent_id' => null,
+        ]);
+        $warranty = MenuAdmin::create([
+            'title' => 'Garansi',
+            'route_name' => 'warranties.index',
+            'icon' => 'feather-gift',
+            'group' => 'Sales',
+            'order' => 9,
             'parent_id' => null,
         ]);
 
@@ -93,7 +101,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'menu_admins.index',
             'icon' => 'feather-grid',
             'group' => 'Main',
-            'order' => 7,
+            'order' => 10,
             'parent_id' => null,
         ]);
         $role = MenuAdmin::create([
@@ -101,7 +109,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'roles.index',
             'icon' => 'feather-users',
             'group' => 'Main',
-            'order' => 8,
+            'order' => 11,
             'parent_id' => null,
         ]);
         $permission = MenuAdmin::create([
@@ -109,7 +117,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'permissions.index',
             'icon' => 'feather-lock',
             'group' => 'Main',
-            'order' => 9,
+            'order' => 12,
             'parent_id' => null,
         ]);
         $province = MenuAdmin::create([
@@ -117,7 +125,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'provinces.index',
             'icon' => 'feather-map-pin',
             'group' => 'Main',
-            'order' => 10,
+            'order' => 13,
             'parent_id' => null,
         ]);
 
@@ -126,7 +134,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'brands.index',
             'icon' => 'feather-tag',
             'group' => 'Main',
-            'order' => 11,
+            'order' => 14,
             'parent_id' => null,
         ]);
 
@@ -135,7 +143,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'vehicles.index',
             'icon' => 'feather-truck',
             'group' => 'Main',
-            'order' => 12,
+            'order' => 15,
             'parent_id' => null,
         ]);
 
@@ -144,7 +152,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'customers.index',
             'icon' => 'feather-users',
             'group' => 'User',
-            'order' => 13,
+            'order' => 16,
             'parent_id' => null,
         ]);
 
@@ -153,7 +161,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'users.index',
             'icon' => 'feather-user',
             'group' => 'User',
-            'order' => 14,
+            'order' => 17,
             'parent_id' => null,
         ]);
 
@@ -162,7 +170,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'shops.index',
             'icon' => 'feather-pocket',
             'group' => 'User',
-            'order' => 15,
+            'order' => 18,
             'parent_id' => null,
         ]);
 
@@ -171,7 +179,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'sliders.index',
             'icon' => 'feather-sliders',
             'group' => 'Web',
-            'order' => 16,
+            'order' => 19,
             'parent_id' => null,
         ]);
 
@@ -180,7 +188,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'options.index',
             'icon' => 'feather-settings',
             'group' => 'Web',
-            'order' => 17,
+            'order' => 20,
             'parent_id' => null,
         ]);
         $about = MenuAdmin::create([
@@ -188,7 +196,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'abouts.index',
             'icon' => 'feather-globe',
             'group' => 'Web',
-            'order' => 18,
+            'order' => 21,
             'parent_id' => null,
         ]);
         $about = MenuAdmin::create([
@@ -196,7 +204,7 @@ class MenuAdminSeeder extends Seeder
             'route_name' => 'menus.index',
             'icon' => 'feather-grid',
             'group' => 'Web',
-            'order' => 18,
+            'order' => 22,
             'parent_id' => null,
         ]);
 

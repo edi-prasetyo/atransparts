@@ -31,7 +31,7 @@ class MenuController extends Controller
         $menu->parent_id = $validatedData['parent_id'];
         $menu->status = $validatedData['status'] == true ? '1' : '0';
         $menu->save();
-        return redirect('admin/menus/show/' . $menu->id)->with('message', 'Menu Has Added');
+        return redirect(route('menus.show', $menu->id))->with('message', 'Menu Has Added');
     }
     function show($id)
     {

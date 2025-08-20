@@ -24,8 +24,9 @@
                             <th scope="col">Total Harga</th>
                             <th scope="col">Diskon</th>
                             <th scope="col">Grand total</th>
+                            <th scope="col">status</th>
                             <th scope="col">Pembayaran</th>
-                            <th width="10%">Action</th>
+                            <th width="15%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,9 +40,35 @@
                                 <td>Rp. {{ number_format($item->total_price) }}</td>
                                 <td>Rp. {{ number_format($item->discount) }}</td>
                                 <td>Rp. {{ number_format($item->grand_total) }}</td>
+                                <td>
+                                    @php
+                                        $statusClass = match ($item->payment_status) {
+                                            'paid' => 'text-success',
+                                            'unpaid' => 'text-danger',
+                                            'refunded' => 'text-secondary',
+                                            default => '',
+                                        };
+                                    @endphp
+                                    <span class="{{ $statusClass }}">
+                                        {{ ucfirst($item->payment_status ?? '') }}
+                                    </span>
+                                </td>
                                 <td>{{ $item->payment_method ?? '' }}</td>
                                 <td><a href="{{ route('orders.show', $item->id) }}"
-                                        class="btn btn-sm btn-primary text-white">Lihat</a> </td>
+                                        class="btn btn-sm btn-primary text-white">Lihat</a>
+                                    @if ($item->payment_status !== 'paid')
+                                        <button type="button" class="btn btn-sm btn-success btn-mark-paid"
+                                            data-url="{{ route('orders.markPaid', $item->id) }}">
+                                            Mark as Paid
+                                        </button>
+                                    @endif
+
+                                    <form id="form-mark-paid" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('PUT')
+                                    </form>
+
+                                </td>
 
                             </tr>
                         @empty
@@ -61,3 +88,28 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.querySelectorAll('.btn-mark-paid').forEach(button => {
+            button.addEventListener('click', function() {
+                let url = this.dataset.url; // ambil dari data-url
+                Swal.fire({
+                    title: 'Yakin ingin tandai sebagai Paid?',
+                    text: "Status pembayaran akan diubah menjadi Paid",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, tandai Paid'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let form = document.getElementById('form-mark-paid');
+                        form.action = url; // pakai URL dari route()
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

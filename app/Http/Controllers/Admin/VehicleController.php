@@ -19,6 +19,11 @@ class VehicleController extends Controller
             ->paginate(10);
         return view('admin.vehicle.index', compact('vehicles', 'brands'));
     }
+    public function show($id)
+    {
+        $vehicle = Vehicle::find($id);
+        return response()->json('vehicle', $vehicle);
+    }
     public function create()
     {
         $brands = Brand::all();

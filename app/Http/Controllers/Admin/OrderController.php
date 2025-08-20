@@ -210,4 +210,13 @@ class OrderController extends Controller
             return redirect()->back()->withErrors(['error' => 'Gagal menyimpan order. ' . $e->getMessage()]);
         }
     }
+
+    public function markPaid($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->payment_status = 'paid';
+        $order->save();
+
+        return redirect()->back()->with('message', 'Payment status berhasil diupdate menjadi Paid.');
+    }
 }

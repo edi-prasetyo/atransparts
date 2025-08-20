@@ -52,7 +52,7 @@
 
                         <div class="mb-2 col-md-6">
                             <label>Shop</label>
-                            <select name="shop_id" class="form-control" required>
+                            <select name="shop_id" class="form-control">
                                 <option value="">-- Pilih Shop --</option>
                                 @foreach ($shops as $shop)
                                     <option value="{{ $shop->id }}"

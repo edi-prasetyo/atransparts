@@ -79,4 +79,21 @@ class ProductionController extends Controller
         $production->update();
         return redirect('admin/productions')->with('message', 'Production update Succesfully');
     }
+    public function destroy($id)
+    {
+        $production = Production::findOrFail($id);
+
+        // Hapus file gambar jika ada
+        if ($production->image) {
+            $path = 'uploads/logo/' . $production->image;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
+
+        $production->delete();
+
+        return redirect('admin/productions')->with('message', 'Production deleted successfully.');
+    }
 }

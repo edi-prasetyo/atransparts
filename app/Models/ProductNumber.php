@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductNumber extends Model
 {
@@ -24,5 +25,9 @@ class ProductNumber extends Model
     public function stock()
     {
         return $this->hasOne(Stock::class); // misalnya
+    }
+    public function productBrand()
+    {
+        return $this->belongsTo(ProductBrand::class);
     }
 }

@@ -96,25 +96,21 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-
                                     <th>Nomor</th>
                                     <th>Nomor Pabrik</th>
                                     <th>Nomor Asli</th>
                                     <th>Merek</th>
                                     <th>Mobil</th>
-                                    <th>Stock</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($parts as $part)
                                     <tr>
-
                                         <td>{{ $part->number }} </td>
                                         <td>{{ $part->vendor_number }}</td>
                                         <td>{{ $part->model_number }}</td>
                                         <td>{{ $part->brand }}</td>
                                         <td>{{ $part->vehicle }}</td>
-                                        <td>{{ $part->quantity }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

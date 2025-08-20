@@ -75,6 +75,7 @@ class PermissionSeeder extends Seeder
             ['route_name' => 'orders.destroy', 'description' => 'Delete Pesanan'],
             ['route_name' => 'orders.print', 'description' => 'Print Pesanan'],
             ['route_name' => 'orders.export', 'description' => 'Export Pesanan'],
+            ['route_name' => 'orders.markPaid', 'description' => 'Update status bayar Pesanan'],
 
             ['route_name' => 'permissions.index', 'description' => 'List Permission',],
             ['route_name' => 'permissions.create', 'description' => 'Create Permission',],
@@ -119,6 +120,9 @@ class PermissionSeeder extends Seeder
             ['route_name' => 'products.parts.update', 'description' => 'Update Part Produk'],
             ['route_name' => 'products.addParts', 'description' => 'Tambah Part Produk'],
             ['route_name' => 'products.addTranslate', 'description' => 'Tambah Translate Produk'],
+            ['route_name' => 'products.editTranslate', 'description' => 'Edit Translate Produk'],
+            ['route_name' => 'products.updateTranslate', 'description' => 'Update Translate Produk'],
+            ['route_name' => 'products.destroyTranslate', 'description' => 'Hapus Translate Produk'],
 
             ['route_name' => 'productions.index', 'description' => 'Index Production'],
             ['route_name' => 'productions.create', 'description' => 'Create Production'],
@@ -164,6 +168,7 @@ class PermissionSeeder extends Seeder
             ['route_name' => 'users.destroy', 'description' => 'Delete User'],
 
             ['route_name' => 'vehicles.index', 'description' => 'List Kendaraan'],
+            ['route_name' => 'vehicles.show', 'description' => 'List Kendaraan'],
             ['route_name' => 'vehicles.create', 'description' => 'Create Kendaraan'],
             ['route_name' => 'vehicles.store', 'description' => 'Store Kendaraan'],
             ['route_name' => 'vehicles.edit', 'description' => 'Edit Kendaraan'],
@@ -191,6 +196,15 @@ class PermissionSeeder extends Seeder
             ['route_name' => 'product-brands.edit', 'description' => 'Edit product brand'],
             ['route_name' => 'product-brands.update', 'description' => 'Update product brand'],
             ['route_name' => 'product-brands.destroy', 'description' => 'Hapus product brand'],
+
+            ['route_name' => 'warranties.index', 'description' => 'list product Garansi'],
+            ['route_name' => 'warranties.create', 'description' => 'Detail product Garansi'],
+            ['route_name' => 'warranties.show', 'description' => 'Detail product Garansi'],
+            ['route_name' => 'warranties.store', 'description' => 'Store product Garansi'],
+            ['route_name' => 'warranties.edit', 'description' => 'Edit product Garansi'],
+            ['route_name' => 'warranties.update', 'description' => 'Update product Garansi'],
+            ['route_name' => 'warranties.destroy', 'description' => 'Hapus product Garansi'],
+            ['route_name' => 'warranties.claim', 'description' => 'Klaim product Garansi'],
 
             ['route_name' => 'reports.stock', 'description' => 'List Laporan Stok'],
             ['route_name' => 'reports.order', 'description' => 'List Laporan Penjualan'],

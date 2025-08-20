@@ -26,11 +26,13 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VehicleController;
+use App\Http\Controllers\Admin\WarrantyController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
+use App\Http\Controllers\Frontend\WarrantyController as FrontendWarrantyController;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -84,6 +86,14 @@ Route::group(
         Route::get('/news', [FrontendPostController::class, 'index'])->name('news');
         Route::get('/news/{slug}', [FrontendPostController::class, 'show'])->name('news-detail');
 
+        Route::get('/warranty', [FrontendWarrantyController::class, 'index'])->name('warranty.index');
+        Route::post('/warranty', [FrontendWarrantyController::class, 'check'])->name('warranty.check');
+        Route::get('/warranty/activate/{code}', [FrontendWarrantyController::class, 'activateForm'])->name('warranty.activate');
+        Route::post('/warranty/activate/{code}', [FrontendWarrantyController::class, 'activateStore'])->name('warranty.activate.store');
+        Route::get('/warranty/activated/{code}', [FrontendWarrantyController::class, 'activated'])->name('warranty.activated');
+        Route::post('/warranty/{code}/claim', [FrontendWarrantyController::class, 'claimSend'])
+            ->name('warranty.claimSend');
+
 
         Route::prefix('admin')->middleware(['auth', 'isAdmin', 'permission'])->group(function () {
 
@@ -112,6 +122,11 @@ Route::group(
             Route::get('/products/part/{product_id}', [ProductController::class, 'parts'])->name('products.parts');
             Route::post('/products/add_part', [ProductController::class, 'add_part'])->name('products.addParts');
             Route::post('/products/add_translate', [ProductController::class, 'add_translate'])->name('products.addTranslate');
+            Route::get('/products/edit_translate/{id}', [ProductController::class, 'edit_translate'])->name('products.editTranslate');
+            Route::put('/products/update_translate/{id}', [ProductController::class, 'update_translate'])->name('products.updateTranslate');
+            Route::delete('products/destroy_translate/{id}', [ProductController::class, 'destroy_translate'])->name('products.destroyTranslate');
+
+
             Route::resource('shops', ShopController::class);
             Route::resource('customers', CustomerController::class);
             Route::resource('cities', ProvinceController::class);
@@ -123,6 +138,7 @@ Route::group(
 
             Route::resource('users', UserController::class);
             Route::resource('orders', OrderController::class);
+            Route::put('/orders/{id}/mark-paid', [OrderController::class, 'markPaid'])->name('orders.markPaid');
             Route::resource('permissions', PermissionController::class);
             Route::resource('menu_admins', MenuAdminController::class);
             Route::post('menu_admins/{menuAdmin}/assign-permission', [MenuAdminController::class, 'assignPermission'])->name('menu_admins.assign_permission');
@@ -148,6 +164,9 @@ Route::group(
             Route::get('/reports/orders/export-excel', [ReportController::class, 'exportOrderExcel'])->name('reports.orders.export.excel');
             Route::get('/reports/orders/export-pdf', [ReportController::class, 'exportOrderPdf'])->name('reports.orders.export.pdf');
             Route::get('/reports/orders/export-word', [ReportController::class, 'exportOrderWord'])->name('reports.orders.export.word');
+
+            Route::resource('warranties', WarrantyController::class);
+            Route::post('warranties/{id}/claim', [WarrantyController::class, 'claim'])->name('warranties.claim');
         });
     }
 );

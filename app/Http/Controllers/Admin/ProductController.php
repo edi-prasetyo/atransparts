@@ -95,6 +95,51 @@ class ProductController extends Controller
         $product_translate->save();
         return redirect()->back()->with('message', 'Product Translate Has Added');
     }
+    public function edit_translate($id)
+    {
+        $translation = ProductTranslation::findOrFail($id);
+        $product = Product::findOrFail($translation->product_id);
+
+        return view('admin.products.edit_translate', compact('translation', 'product'));
+    }
+
+    public function update_translate(Request $request, $id)
+    {
+        $translation = ProductTranslation::findOrFail($id);
+
+        $request->validate([
+            'name'              => 'required|string|max:255',
+            'locale'            => 'required|string|max:5',
+            'short_description' => 'nullable|string',
+            'description'       => 'nullable|string',
+            'meta_title'        => 'nullable|string|max:255',
+            'meta_keyword'      => 'nullable|string|max:255',
+            'meta_description'  => 'nullable|string',
+        ]);
+
+        $translation->update([
+            'locale'            => $request->locale,
+            'name'              => $request->name,
+            'short_description' => $request->short_description,
+            'description'       => $request->description,
+            'meta_title'        => $request->meta_title,
+            'meta_keyword'      => $request->meta_keyword,
+            'meta_description'  => $request->meta_description,
+        ]);
+
+        return redirect('admin/products/' . $translation->product_id)
+            ->with('message', 'Product Translate Updated Successfully!');
+    }
+    public function destroy_translate($id)
+    {
+        $translation = ProductTranslation::findOrFail($id);
+        $productId   = $translation->product_id; // simpan product_id biar bisa redirect
+
+        $translation->delete();
+
+        return redirect('admin/products/' . $productId)
+            ->with('message', 'Product Translate Deleted Successfully!');
+    }
     // Parts Number
     function parts(int $product_id)
     {

@@ -34,7 +34,7 @@ class UserController extends Controller
             'phone' => 'required|unique:users',
             'password' => 'required|min:6',
             'role_id' => 'required|exists:roles,id',
-            'shop_id' => 'required|exists:shops,id',
+            'shop_id' => 'nullable',
         ]);
 
         $user = User::create([
@@ -46,7 +46,13 @@ class UserController extends Controller
         ]);
 
         $user->roles()->sync([$request->role_id]);
-        $user->shop()->sync([$request->shop_id]);
+        // $user->shop()->sync([$request->shop_id]);
+
+        if ($request->filled('shop_id')) {
+            $user->shop()->sync([$request->shop_id]);
+        } else {
+            $user->shop()->sync([]); // kosongkan relasi jika tidak ada shop
+        }
 
         return redirect()->route('users.index')->with('status', 'User created.');
     }
@@ -65,7 +71,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'required|unique:users,phone,' . $user->id,
             'role_id' => 'required|exists:roles,id',
-            'shop_id' => 'required|exists:shops,id',
+            'shop_id' => 'nullable',
         ]);
 
         $user->update([

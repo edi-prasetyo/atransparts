@@ -23,9 +23,13 @@
                 <div class="offset-xl-1 col-xl-5 col-md-12  d-flex justify-content-end">
                     <div class="">
                         <a href="{{ url(LaravelLocalization::getCurrentLocale() . '/products') }}" target="_blank"
-                            title="Geeks Education Website Template"><img src="{{ url('uploads/slider/' . $about->image) }}"
-                                alt="Geeks UI Academy bootstrap 5 Templates"
-                                class="img-fluid rounded-3 smooth-shadow-md"></a>
+                            title="Atrans">
+                            @if ($about->image == null)
+                            @else
+                                <img src="{{ url('uploads/slider/' . $about->image) }}" alt="Atarns Autoparts"
+                                    class="img-fluid rounded-3 smooth-shadow-md">
+                            @endif
+                        </a>
                     </div>
                 </div>
             </div>

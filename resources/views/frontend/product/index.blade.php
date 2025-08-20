@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container my-5">
+    <div class="container my-5 pb-5">
 
         <div class="d-flex justify-content-center align-items-center">
             <h1 class="fw-bold text-body-emphasis">{{ __('homepage.our_product') }}</h1>

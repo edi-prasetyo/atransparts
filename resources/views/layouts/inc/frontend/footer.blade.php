@@ -1,4 +1,4 @@
-<div class="footer-area mt-auto">
+<div class="footer-area mt-auto d-none d-sm-block">
     <div class="container col-md-9 mx-auto">
         <div class="row">
             <div class="col-md-3">
@@ -57,7 +57,8 @@
                 <div class="col-md-6">
                     <a href="https://www.tokopedia.com/atrans" target="blank"> <img class="mb-2 img-fluid"
                             src="{{ asset('uploads/logo/tokopedia-logo.png') }}"></a>
-                    <a href=""> <img class="img-fluid" src="{{ asset('uploads/logo/shopee-logo.png') }}"> </a>
+                    <a href=""> <img class="img-fluid" src="{{ asset('uploads/logo/shopee-logo.png') }}">
+                    </a>
                 </div>
             </div>
         </div>
@@ -67,7 +68,8 @@
     <div class="container col-md-9 mx-auto">
         <div class="row">
             <div class="col-md-8">
-                <p class=""> &copy; 2022 - {{ date('Y') }} {{ $option_nav->tagline }}. All rights reserved.
+                <p class=""> &copy; 2022 - {{ date('Y') }} {{ $option_nav->tagline }}. All rights
+                    reserved.
                 </p>
             </div>
             <div class="col-md-4">
