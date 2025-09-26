@@ -10,6 +10,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Slug</th>
                         <th>Status</th>
@@ -19,6 +20,13 @@
                 <tbody>
                     @foreach ($brands as $brand)
                         <tr>
+                            <td>
+                                @if ($brand->image)
+                                    <img src="{{ asset($brand->image) }}" alt="Brand" width="50">
+                                @else
+                                    <span class="text-muted">No Image</span>
+                                @endif
+                            </td>
                             <td>{{ $brand->name }}</td>
                             <td>{{ $brand->slug }}</td>
                             <td>
@@ -75,6 +83,15 @@
                                     </option>
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label>Image (optional)</label>
+                                <input type="file" name="image" class="form-control">
+                                @if ($brand->image)
+                                    <div class="mt-2">
+                                        <img src="{{ asset($brand->image) }}" alt="Brand" width="80">
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary">Save changes</button>
@@ -109,6 +126,10 @@
                                 <option value="1" selected>Active</option>
                                 <option value="0">Inactive</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Image (optional)</label>
+                            <input type="file" name="image" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">

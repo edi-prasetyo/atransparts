@@ -20,10 +20,17 @@ class ProductBrandController extends Controller
             'name' => 'required|string|max:100|unique:product_brands,name',
             'slug' => 'nullable|string|max:100|unique:product_brands,slug',
             'status' => 'required|in:0,1',
+            'image' => 'nullable',
         ]);
 
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['name']);
+        }
+
+        if ($request->hasFile('image')) {
+            $filename = time() . '_' . uniqid() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/brand'), $filename);
+            $validated['image'] = 'uploads/brand/' . $filename;
         }
 
         ProductBrand::create($validated);
@@ -36,10 +43,21 @@ class ProductBrandController extends Controller
             'name' => 'required|string|max:100|unique:product_brands,name,' . $productBrand->id,
             'slug' => 'nullable|string|max:100|unique:product_brands,slug,' . $productBrand->id,
             'status' => 'required|in:0,1',
+            'image' => 'nullable',
         ]);
 
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['name']);
+        }
+
+        if ($request->hasFile('image')) {
+            // Hapus file lama kalau ada
+            if ($productBrand->image && file_exists(public_path($productBrand->image))) {
+                unlink(public_path($productBrand->image));
+            }
+            $filename = time() . '_' . uniqid() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/brand'), $filename);
+            $validated['image'] = 'uploads/brand/' . $filename;
         }
 
         $productBrand->update($validated);

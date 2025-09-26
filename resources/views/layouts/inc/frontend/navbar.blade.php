@@ -103,7 +103,7 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
 
-                                @if (Auth::user()->roles()->whereIn('name', ['superadmin', 'admin'])->exists())
+                                @if (Auth::user()->roles()->whereIn('name', ['superadmin', 'admin', 'shop', 'finance'])->exists())
                                     <a class="dropdown-item" href="{{ url('admin/dashboard') }}">
                                         Dashboard
                                     </a>

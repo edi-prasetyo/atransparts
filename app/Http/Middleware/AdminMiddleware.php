@@ -27,7 +27,7 @@ class AdminMiddleware
     {
         $user = Auth::user();
 
-        if (!$user || !$user->roles()->whereIn('name', ['superadmin', 'admin'])->exists()) {
+        if (!$user || !$user->roles()->whereIn('name', ['superadmin', 'admin', 'shop', 'finance'])->exists()) {
             return redirect('/member')->with('status', 'Access Denied. You are not admin.');
         }
 

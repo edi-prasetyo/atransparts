@@ -23,8 +23,15 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Name</label>
-                                <input type="text" name="name"
-                                    class="form-control @error('name') is-invalid @enderror">
+                                <input list="vehicle-names" name="name"
+                                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+
+                                <datalist id="vehicle-names">
+                                    @foreach ($vehicles as $vehicle)
+                                        <option value="{{ $vehicle->name }}">
+                                    @endforeach
+                                </datalist>
+
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

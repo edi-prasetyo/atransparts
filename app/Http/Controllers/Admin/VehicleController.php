@@ -29,23 +29,46 @@ class VehicleController extends Controller
         $brands = Brand::all();
         return view('admin.vehicle.create', compact('brands'));
     }
+    // public function store(Request $request)
+    // {
+    //     $slugRequest = Str::slug($request['name']);
+    //     $code = random_int(00, 99);
+    //     $slug = $slugRequest . '-' . $code;
+
+    //     $vehicle = new Vehicle;
+    //     $vehicle->name = $request['name'];
+    //     $vehicle->brand_id = $request['brand_id'];
+    //     if (Vehicle::where('slug', $slugRequest)->exists()) {
+    //         $vehicle->slug = $slug;
+    //     } else {
+    //         $vehicle->slug = $slugRequest;
+    //     }
+    //     $vehicle->status = $request->status == true ? '1' : '0';
+
+    //     $vehicle->save();
+    //     return redirect('admin/vehicles')->with('message', 'Vehicle Has Added');
+    // }
+
     public function store(Request $request)
     {
-        $slugRequest = Str::slug($request['name']);
+        $request->validate([
+            'brand_id' => 'required|exists:brands,id',
+            'name'     => 'required|string|max:255|unique:vehicles,name',
+        ]);
+
+        $slugRequest = Str::slug($request->name);
         $code = random_int(00, 99);
-        $slug = $slugRequest . '-' . $code;
+        $slug = Vehicle::where('slug', $slugRequest)->exists()
+            ? $slugRequest . '-' . $code
+            : $slugRequest;
 
-        $vehicle = new Vehicle;
-        $vehicle->name = $request['name'];
-        $vehicle->brand_id = $request['brand_id'];
-        if (Vehicle::where('slug', $slugRequest)->exists()) {
-            $vehicle->slug = $slug;
-        } else {
-            $vehicle->slug = $slugRequest;
-        }
-        $vehicle->status = $request->status == true ? '1' : '0';
-
+        $vehicle = new Vehicle();
+        $vehicle->name = $request->name;
+        $vehicle->brand_id = $request->brand_id;
+        $vehicle->slug = $slug;
+        $vehicle->status = $request->status ? 1 : 0;
         $vehicle->save();
+
         return redirect('admin/vehicles')->with('message', 'Vehicle Has Added');
     }
     function edit(Vehicle $vehicle)
