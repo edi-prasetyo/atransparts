@@ -180,11 +180,35 @@ class OrderController extends Controller
                     'total' => $item['price'] * $item['quantity'],
                 ]);
 
+                Log::info('SEBELUM decrement stok', [
+                    'stock_id' => $stock->id,
+                    'product_id' => $item['product_id'],
+                    'product_number_id' => $item['product_number_id'],
+                    'qty_sebelum' => $stock->quantity,
+                    'qty_kurang' => $item['quantity'],
+                ]);
+
                 // Kurangi stok
                 $stock->decrement('quantity', $item['quantity']);
 
+                $stock->refresh();
+
+                Log::info('SESUDAH decrement stok', [
+                    'stock_id' => $stock->id,
+                    'qty_sesudah' => $stock->quantity,
+                ]);
+
                 // Simpan log stok
-                StockLog::create([
+                Log::info('AKAN SIMPAN StockLog', [
+                    'shop_id' => $shop_id,
+                    'user_id' => $user_id,
+                    'stock_id' => $stock->id,
+                    'order_id' => $order->id,
+                    'quantity' => $item['quantity'],
+                    'type' => 'out',
+                ]);
+
+                $stockLog = StockLog::create([
                     'shop_id' => $shop_id,
                     'user_id' => $user_id,
                     'product_id' => $item['product_id'],
@@ -195,6 +219,10 @@ class OrderController extends Controller
                     'quantity' => $item['quantity'],
                     'order_id' => $order->id,
                     'note' => 'Order baru ID ' . $order->id,
+                ]);
+
+                Log::info('BERHASIL SIMPAN StockLog', [
+                    'stock_log_id' => $stockLog->id ?? null,
                 ]);
             }
 

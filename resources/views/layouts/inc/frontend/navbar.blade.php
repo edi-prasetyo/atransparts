@@ -75,9 +75,6 @@
                     </li>
 
 
-
-
-
                     @guest
                         @if (Route::has('register'))
                             <li class="nav-item me-2">
